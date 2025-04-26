@@ -1,0 +1,42 @@
+{% load static %} <!-- Carregar static, arquivo CSS -->
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SalonTime - Agendar</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<header>
+    <h1>SalonTime</h1>
+</header>
+
+<div class="container">
+    <h2>Agendar</h2>
+    <form method="POST"> <!-- Envio de dados -->
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <p>{{ form.nome.label_tag }} {{ form.nome }}</p>
+        <p>{{ form.sexo.label_tag }} {{ form.sexo }}</p>
+        
+        <p><strong>Serviços:</strong></p>
+        {{ form.servicos }}
+
+        <p>{{ form.telefone.label_tag }} {{ form.telefone }}</p>
+        <p>{{ form.email.label_tag }} {{ form.email }}</p>
+        <p>{{ form.horario.label_tag }} {{ form.horario }}</p>
+
+        <button type="submit" class="btn">Salvar</button>
+    </form>
+</div>
+
+<footer>
+    <p>&copy; 2025 SalonTime. Todos os direitos reservados.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SalonTime - Lista de Clientes</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<header>
+    <h1>SalonTime</h1>
+</header>
+
+<div class="container">
+    <h2>Lista de Clientes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Sexo</th>
+                <th>Serviço(s)</th>
+                <th>Preço Total</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.nome }}</td>
+                    <td>{{ cliente.get_sexo_display }}</td>
+                    <td>
+                        {% for servico in cliente.servicos.all %}
+                            <p>{{ servico.nome }} (R${{ servico.preco }})</p>
+                        {% endfor %}
+                    </td>
+                    <td>R${{ cliente.preco }}</td> <!-- Aqui estamos usando o campo preco calculado -->
+                    <td>{{ cliente.telefone }}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>
+                        <a href="{% url 'atualizar_cliente' cliente.id %}">Editar</a>
+                        <a href="{% url 'deletar_cliente' cliente.id %}">Deletar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<footer>
+    <p>&copy; 2025 SalonTime. Todos os direitos reservados.</p>
+</footer>
+
+</body>
+</html>
